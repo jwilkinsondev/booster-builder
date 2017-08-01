@@ -1,0 +1,161 @@
+{
+  "defs": [
+    {
+      "defName": "kld",
+      "query": "from[*]?set='kld'"
+    },
+    {
+      "defName": "kld-masterpiece-series",
+      "query": "from[kld]?masterpiece=true"
+    },
+    {
+      "defName": "kld-base",
+      "query": "from[kld]-from[kld]?type=(Marketing|Basic Land)-from[kld]?token=true-from[kld]?promo=true-from[kld-masterpiece-series]"
+    },
+    {
+      "defName": "kld-main",
+      "query": "from[kld-base]"
+    },
+    {
+      "defName": "kld-foils",
+      "query": "from[kld-main]"
+    },
+    {
+      "defName": "kld-promo",
+      "query": "from[kld]?promo=true"
+    }
+
+  ],
+  "packs": [
+    {
+      "packName": "kld-all-cards",
+      "packDesc": "Kaladesh: All Cards",
+      "isGenerated": false,
+      "cards": [
+        { "query": "take[*]>from[kld]-from[kld]?doubleFaceBackCard=true" }
+      ]
+    },
+    {
+      "packName": "kld-standard",
+      "packDesc": "Kaladesh: Standard Booster",
+      "packVersion": "1.0",
+      "isGenerated": true,
+      "cards": [
+        { "query": "take[8]>from[kld-main]?rarity='c" },
+        {
+          "querySet": [
+            {
+              "percent": "143/144",
+              "query": "from[kld-main]?rarity='c"
+            },
+            {
+              "percent": "1/144",
+              "query": "from[kld-masterpiece-series]"
+            }
+          ]
+        },
+        {
+          "querySet": [
+            {
+              "percent": "360/480",
+              "query": "from[kld-main]?rarity='c"
+            },
+            {
+              "percent": "88/480",
+              "query": "from[kld-main]?rarity='c",
+              "setValues": { "foil": true }
+            },
+            {
+              "percent": "24/480",
+              "query": "from[kld-main]?rarity='u",
+              "setValues": { "foil": true }
+            },
+            {
+              "percent": "7/480",
+              "query": "from[kld-main]?rarity='r",
+              "setValues": { "foil": true }
+            },
+            {
+              "percent": "1/480",
+              "query": "from[kld-main]?rarity='m",
+              "setValues": { "foil": true }
+            }
+          ]
+        },
+        { "query": "take[3]>from[kld-main]?rarity='u" },
+        {
+          "querySet": [
+            {
+              "percent": "7/8",
+              "query": "from[kld-main]?rarity='r"
+            },
+            {
+              "percent": "1/8",
+              "query": "from[kld-main]?rarity='m"
+            }
+          ]
+        },
+        { "query": "take[1]>from[kld]?type='Basic Land" },
+        {
+          "querySet": [
+            {
+              "percent": "50",
+              "query": "from[kld]?title='Tip/Marketing Card"
+            },
+            {
+              "percent": "50",
+              "query": "from[kld]?token=true"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "packName": "kld-promos",
+      "packDesc": "Kaladesh: Promos",
+      "isGenerated": false,
+      "includeWithUserCards": false,
+      "cards": [
+        { "query": "take[*]>from[kld-promo]" }
+      ]
+    },
+    {
+      "packName": "kld-prerelease-promo-packins",
+      "packDesc": "Kaladesh: Prerelease Packins",
+      "isGenerated": false,
+      "includeWithUserCards": false,
+      "cards": [
+        {
+          "querySet": [
+            {
+              "percent": "7/8",
+              "query": "from[kld-base]?rarity='r",
+              "setValues": { "foil": true }
+            },
+            {
+              "percent": "1/8",
+              "query": "from[kld-base]?rarity='m",
+              "setValues": { "foil": true }
+            }
+          ]
+        },
+        { "query": "take[1]>from[kld-promo]?type='Life Counter" },
+        { "query": "from[kld-promo]?title='Deck Box" },
+        { "query": "from[kld-promo]?title='Dice Box" },
+        { "query": "from[kld-promo]?title='Thopter" },
+        { "query": "from[kld-promo]?title='Deckbuilding Advice Insert" }
+
+      ]
+    },
+    {
+      "packName": "kld-prerelease-promos",
+      "packDesc": "Kaladesh: Prerelease Promos",
+      "isGenerated": false,
+      "includeWithUserCards": false,
+      "cards": [
+        { "query": "take[*]>from[kld-promo]?includedReason='Prerelease Promo" }
+      ]
+    }
+
+  ]
+}
